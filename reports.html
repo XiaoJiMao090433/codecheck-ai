@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>批量数据报表 - CodeCheck AI</title>
+  <script src="libs/tailwindcss.js"></script>
+  <script src="libs/lucide.js"></script>
+  <script src="libs/chart.js"></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-[#0B1120] text-[#F1F5F9]">
+  <div id="app-container" class="ml-[240px] min-h-screen">
+    <main class="p-6">
+      <!-- 权限隔离：技术总监可见，其他角色显示权限不足 -->
+      <div id="reports-content" data-require-report>
+        <!-- 顶部栏 -->
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h1 class="text-xl font-bold">批量数据报表</h1>
+            <p class="text-sm text-[#94A3B8] mt-1">团队质检数据统计与月度趋势分析</p>
+          </div>
+          <button id="btn-export" class="btn btn-primary text-sm">
+            <i data-lucide="file-down" class="w-4 h-4"></i>
+            导出PDF报告
+          </button>
+        </div>
+
+        <!-- 统计卡片 -->
+        <div class="grid grid-cols-4 gap-4 mb-6">
+          <div class="card py-5">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 rounded-lg bg-[#EF4444]/10 flex items-center justify-center">
+                <i data-lucide="alert-triangle" class="w-5 h-5 text-[#EF4444]"></i>
+              </div>
+              <div>
+                <p class="text-xs text-[#94A3B8]">高危漏洞总数</p>
+                <p class="text-xl font-bold">89</p>
+              </div>
+            </div>
+          </div>
+          <div class="card py-5">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 rounded-lg bg-[#F97316]/10 flex items-center justify-center">
+                <i data-lucide="bug" class="w-5 h-5 text-[#F97316]"></i>
+              </div>
+              <div>
+                <p class="text-xs text-[#94A3B8]">中危缺陷总数</p>
+                <p class="text-xl font-bold">156</p>
+              </div>
+            </div>
+          </div>
+          <div class="card py-5">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 rounded-lg bg-[#8B5CF6]/10 flex items-center justify-center">
+                <i data-lucide="file-warning" class="w-5 h-5 text-[#8B5CF6]"></i>
+              </div>
+              <div>
+                <p class="text-xs text-[#94A3B8]">需求缺陷总数</p>
+                <p class="text-xl font-bold">73</p>
+              </div>
+            </div>
+          </div>
+          <div class="card py-5">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 rounded-lg bg-[#10B981]/10 flex items-center justify-center">
+                <i data-lucide="check-circle" class="w-5 h-5 text-[#10B981]"></i>
+              </div>
+              <div>
+                <p class="text-xs text-[#94A3B8]">本月质检次数</p>
+                <p class="text-xl font-bold">268</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 图表与表格区 -->
+        <div class="grid grid-cols-12 gap-6 mb-6">
+          <!-- 饼图 -->
+          <div class="col-span-5 card p-0">
+            <div class="px-4 py-3 border-b border-[#1E293B]">
+              <span class="text-sm font-medium">团队缺陷分布占比</span>
+            </div>
+            <div class="p-4 flex items-center justify-center" style="height: 340px;">
+              <canvas id="defectPieChart" style="max-height: 300px;"></canvas>
+            </div>
+          </div>
+
+          <!-- 月度数据表格 -->
+          <div class="col-span-7 card p-0">
+            <div class="px-4 py-3 border-b border-[#1E293B]">
+              <span class="text-sm font-medium">月度质检数据汇总</span>
+            </div>
+            <div class="p-4 overflow-auto" style="height: 340px;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>月份</th>
+                    <th>质检次数</th>
+                    <th>高危漏洞</th>
+                    <th>需求缺陷</th>
+                    <th>环比趋势</th>
+                  </tr>
+                </thead>
+                <tbody id="monthly-table-body">
+                  <!-- JS动态填充 -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 底部说明 -->
+        <div class="security-card text-sm text-[#94A3B8]">
+          <div class="flex items-center gap-2 mb-2 text-[#60A5FA]">
+            <i data-lucide="info" class="w-4 h-4"></i>
+            <span class="font-medium">报表说明</span>
+          </div>
+          <p>本报表数据基于团队历史质检记录汇总生成，所有统计仅用于内部质量改进参考。敏感漏洞详情已脱敏处理，完整记录存储于企业私有服务器。</p>
+        </div>
+      </div>
+
+      <!-- 权限不足提示 -->
+      <div id="permission-denied" class="permission-denied hidden">
+        <i data-lucide="lock" class="w-16 h-16 text-[#334155] mb-4"></i>
+        <h3 class="text-xl font-semibold">权限不足</h3>
+        <p class="text-sm mt-2">仅技术总监账号可查看团队全局报表</p>
+        <p class="text-xs mt-4 text-[#64748B]">请切换至技术总监身份后刷新页面</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/reports.js"></script>
+</body>
+</html>
