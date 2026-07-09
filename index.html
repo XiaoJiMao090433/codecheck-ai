@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>工作台首页 - CodeCheck AI</title>
+  <script src="libs/tailwindcss.js"></script>
+  <script src="libs/lucide.js"></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-[#0B1120] text-[#F1F5F9]">
+  <div id="app-container" class="ml-[240px] min-h-screen">
+    <!-- 页面主内容区 -->
+    <main class="p-8 max-w-6xl mx-auto">
+      <!-- 欢迎区 -->
+      <section class="mb-8 fade-in">
+        <h1 class="text-2xl font-bold mb-2">欢迎使用 CodeCheck AI</h1>
+        <p class="text-[#94A3B8]">
+          代码与PRD需求一体化智能质检工具，助力研发团队提升交付质量，保障技术资产安全。
+        </p>
+      </section>
+
+      <!-- 快捷入口卡片 -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 fade-in">
+        <a href="code-review.html" class="card card-hover group no-underline text-[#F1F5F9]">
+          <div class="w-12 h-12 rounded-lg bg-[#165DFF]/10 flex items-center justify-center mb-4 group-hover:bg-[#165DFF]/20 transition-colors">
+            <i data-lucide="code-2" class="w-6 h-6 text-[#165DFF]"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">代码智能审查</h3>
+          <p class="text-sm text-[#94A3B8] leading-relaxed">
+            自动识别高危/中危/低危代码缺陷，一键生成AI优化建议与修复代码。
+          </p>
+        </a>
+
+        <a href="prd-check.html" class="card card-hover group no-underline text-[#F1F5F9]">
+          <div class="w-12 h-12 rounded-lg bg-[#8B5CF6]/10 flex items-center justify-center mb-4 group-hover:bg-[#8B5CF6]/20 transition-colors">
+            <i data-lucide="file-text" class="w-6 h-6 text-[#8B5CF6]"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">PRD需求质检</h3>
+          <p class="text-sm text-[#94A3B8] leading-relaxed">
+            扫描需求歧义与逻辑冲突，自动拆解开发任务并生成测试用例。
+          </p>
+        </a>
+
+        <a href="reports.html" class="card card-hover group no-underline text-[#F1F5F9]" data-role-perm="reports">
+          <div class="w-12 h-12 rounded-lg bg-[#10B981]/10 flex items-center justify-center mb-4 group-hover:bg-[#10B981]/20 transition-colors">
+            <i data-lucide="bar-chart-3" class="w-6 h-6 text-[#10B981]"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">批量数据报表</h3>
+          <p class="text-sm text-[#94A3B8] leading-relaxed">
+            团队缺陷统计与月度质检趋势分析，支持导出统计报告。
+          </p>
+          <div class="mt-3 inline-flex items-center gap-1 text-xs text-[#F59E0B]">
+            <i data-lucide="crown" class="w-3 h-3"></i>
+            <span>技术总监专属</span>
+          </div>
+        </a>
+      </section>
+
+      <!-- 功能特性说明 -->
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 fade-in">
+        <div class="card">
+          <h3 class="text-base font-semibold mb-4 flex items-center gap-2">
+            <i data-lucide="zap" class="w-5 h-5 text-[#F59E0B]"></i>
+            核心能力
+          </h3>
+          <ul class="space-y-3 text-sm text-[#94A3B8]">
+            <li class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#165DFF] mt-1.5 flex-shrink-0"></span>
+              <span>支持 JS/Python/Java/Go 代码片段自动审查与风险分级</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#165DFF] mt-1.5 flex-shrink-0"></span>
+              <span>PRD 文档自动扫描需求歧义、边界缺失与逻辑冲突</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#165DFF] mt-1.5 flex-shrink-0"></span>
+              <span>AI 一键生成修复代码与逐条修改理由说明</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#165DFF] mt-1.5 flex-shrink-0"></span>
+              <span>团队级质检报表与月度趋势数据可视化</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="text-base font-semibold mb-4 flex items-center gap-2">
+            <i data-lucide="shield" class="w-5 h-5 text-[#22C55E]"></i>
+            安全合规
+          </h3>
+          <ul class="space-y-3 text-sm text-[#94A3B8]">
+            <li class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#22C55E] mt-1.5 flex-shrink-0"></span>
+              <span>代码与文档仅本地解析，不上传公域大模型</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#22C55E] mt-1.5 flex-shrink-0"></span>
+              <span>企业私有技术资产加密存储，防泄露</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#22C55E] mt-1.5 flex-shrink-0"></span>
+              <span>操作记录全链路可溯源，满足审计要求</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#22C55E] mt-1.5 flex-shrink-0"></span>
+              <span>细粒度角色权限隔离，适配研发组织架构</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 使用提示 -->
+      <section class="card fade-in">
+        <h3 class="text-base font-semibold mb-3 flex items-center gap-2">
+          <i data-lucide="info" class="w-5 h-5 text-[#3B82F6]"></i>
+          快速上手
+        </h3>
+        <p class="text-sm text-[#94A3B8] leading-relaxed">
+          1. 点击左侧导航栏进入对应功能模块。<br>
+          2. 代码审查与PRD质检页面均内置<b>「一键加载演示素材」</b>按钮，可快速体验AI质检效果。<br>
+          3. 通过右上角身份切换下拉框，可模拟实习生、普通开发、技术总监三种角色的权限差异。<br>
+          4. 所有检测逻辑均在浏览器本地模拟运行，无需等待后端响应。
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/layout.js"></script>
+  <script>
+    // 首页额外初始化
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
